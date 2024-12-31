@@ -50,6 +50,8 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
+      '-use_wallclock_as_timestamps',
+      '1',
       // '-async', '1',
       '-f', 'pulse', '-thread_queue_size', '4096', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
