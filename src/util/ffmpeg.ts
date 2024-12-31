@@ -50,8 +50,8 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
-      '-probesize', '6000M',
-      '-analyzeduration', '6000M',
+      // '-probesize', '6000M',
+      '-analyzeduration', '3000M',
       '-vsync', '2',
       '-use_wallclock_as_timestamps',
       '1',
