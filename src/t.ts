@@ -53,7 +53,8 @@ import * as fs from 'fs';
             width,
             height,
         });
-        await page.goto("https://baidu.com")
+        // await page.goto("https://baidu.com")
+        await page.goto("https://cn-zjjh-ct-04-07.bilivideo.com/upgcxcode/06/40/27615234006/27615234006-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1735678295&gen=playurlv2&os=bcache&oi=730790904&trid=0000e18ec7f4b62640f794802889429eedcfh&mid=0&platform=html5&og=hw&upsig=d97facb3db362665ef3312a5b2d8fda8&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=6592&bvc=vod&nettype=0&f=h_0_0&bw=30328&logo=80000000")
         // await page.waitForSelector('div');
         // await page.waitForSelector('div');
         await page.setBypassCSP(true);
