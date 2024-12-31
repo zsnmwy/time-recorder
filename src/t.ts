@@ -53,7 +53,7 @@ import * as fs from 'fs';
             width,
             height,
         });
-        await page.goto("https://baidu.com")
+        await page.goto("https://www.bilibili.com/video/BV1Gy6HY9EAN/?spm_id_from=333.1007.tianma.2-3-6.click&vd_source=1631292760ce04ac6ed39544dff2568c")
         // await page.waitForSelector('div');
         // await page.waitForSelector('div');
         await page.setBypassCSP(true);
