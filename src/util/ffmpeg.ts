@@ -50,14 +50,14 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
-      '-thread_queue_size', '16',
       '-async', '1',
-      '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
+      '-f', 'pulse', '-thread_queue_size', '1024', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
       '-framerate',
       '30',
       '-f',
       'x11grab',
+      '-thread_queue_size', '1024',
       '-s',
       `${width}x${height}`,
       '-draw_mouse',
