@@ -59,7 +59,7 @@ import * as fs from 'fs';
             height,
         });
 
-        await page.goto("https://cn-lndl-ct-01-08.bilivideo.com/upgcxcode/64/97/27627359764/27627359764-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1735680175&gen=playurlv2&os=bcache&oi=730790904&trid=0000cd8329efdf1e4d429f9486803e8eedc7h&mid=0&platform=html5&og=cos&upsig=e9218e565f8e64c356760505b6f76407&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88008&bvc=vod&nettype=0&f=h_0_0&bw=57564&logo=80000000")
+        await page.goto("https://cn-sh-ct-01-28.bilivideo.com/upgcxcode/35/04/27629060435/27629060435-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1735684702&gen=playurlv2&os=bcache&oi=730790904&trid=00009b05f094304949ad94107278860373f8h&mid=0&platform=html5&og=cos&upsig=40f76bd576b52bd883e8b791dc21c8ed&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88228&bvc=vod&nettype=0&f=h_0_0&bw=29925&logo=80000000")
         // await page.waitForSelector('div');
         // await page.waitForSelector('div');
         await page.setBypassCSP(true);

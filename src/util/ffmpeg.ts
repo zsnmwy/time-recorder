@@ -70,7 +70,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       ':' + display,
       '-c:v',
       'libx264',
-      // '-preset', 'medium', // 编码器预设为中等速度
+      '-preset', 'ultrafast', // 编码器预设为最快速度
       // '-profile:v', 'high', // 指定编码器配置文件为high
       // '-pix_fmt', 'yuv420p', // 设置像素格式为yuv420p，以兼容High Profile
       // '-level:v', '4.1', // 指定编码器级别为4.1
