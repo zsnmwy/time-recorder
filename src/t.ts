@@ -17,6 +17,9 @@ import * as fs from 'fs';
 
         console.log(`display ${display}`)
 
+
+        await new Promise((r) => setTimeout(r, 10 * 1000));
+
         const browser = await puppeteer.launch({
             headless: false,
             executablePath: '/home/runner/work/time-recorder/time-recorder/ungoogled-chromium_131.0.6778.244_1.vaapi_linux/chrome',
