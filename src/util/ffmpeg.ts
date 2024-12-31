@@ -50,10 +50,12 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
+      '-async',
+      '1',
       '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
       '-framerate',
-      '60',
+      '30',
       '-f',
       'x11grab',
       '-s',
