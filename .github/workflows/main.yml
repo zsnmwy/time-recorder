@@ -47,3 +47,11 @@ jobs:
           ls -lah
           cd ..
           ls -lah
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          # Artifact name
+          name: screen.webm
+          # A file, directory or wildcard pattern that describes what to upload
+          path: /home/runner/work/time-recorder/happy-date/screen.webm
