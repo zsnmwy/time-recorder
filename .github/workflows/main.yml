@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4.2.2
       - name: Install Deps
         run: |
-          apt-get update && apt-get install -y \
+          sudo apt-get update && sudo apt-get install -y \
             curl \
             git \
             make \
@@ -27,11 +27,21 @@ jobs:
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
 
-          wget 'https://github.com/macchrome/linchrome/releases/download/v131.6778.244-M131.0.6778.244-r1368529-portable-ungoogled-Lin64/ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz'
+          wget -q 'https://github.com/macchrome/linchrome/releases/download/v131.6778.244-M131.0.6778.244-r1368529-portable-ungoogled-Lin64/ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz'
           tar xvf ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz
           pwd
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.1.0
       - name: Install Deps
         run: npm i
-          
+      - name: Run Pulseaudio
+        run: |
+          sudo adduser root pulse-access
+          sudo pulseaudio -D --verbose --exit-idle-time=-1 --system --disallow-exit
+          sudo pactl load-module module-null-sink sink_name="grab" sink_properties=device.description="monitorOUT"
+          sudo pactl list short sources
+          pactl list short sources
+      - name: Record video
+        run: |
+          cd src
+          npx ts-node t.ts

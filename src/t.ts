@@ -19,7 +19,7 @@ import * as fs from 'fs';
 
         const browser = await puppeteer.launch({
             headless: false,
-            executablePath: '/workspaces/time-recorder/src/ungoogled-chromium_131.0.6778.244_1.vaapi_linux/chrome',
+            executablePath: '/home/runner/work/time-recorder/time-recorder/ungoogled-chromium_131.0.6778.244_1.vaapi_linux/chrome',
             defaultViewport: null,
             args: [
                 '--enable-usermedia-screen-capturing',
