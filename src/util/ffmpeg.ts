@@ -1,5 +1,23 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import { BASE_PATH } from './constant';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
+const exec = promisify(execFile);
+
+async function getFirstSourceIndex() {
+  try {
+    const {stdout, stderr} = await exec('sh', ['-c', 'pactl list short sources | awk \'{print $1}\'']);
+    if (stderr) {
+      throw new Error(`命令执行错误: ${stderr}`);
+    }
+    const firstSourceIndex = stdout.trim();
+    console.log(`第一个音频源的索引号是: ${firstSourceIndex}`);
+    return firstSourceIndex;
+  } catch (error) {
+    console.error(`执行命令出错: ${error.message}`);
+  }
+}
+
 class FFmpeg {
   private ffmpeg: {
     [key: string]: ChildProcessWithoutNullStreams;
@@ -22,7 +40,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
   const { width, height } = option;
   try {
     const params = [
-      '-f', 'pulse', '-i', '0', '-c:a', 'pcm_s16le',
+      '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
       '-framerate',
       '12',
