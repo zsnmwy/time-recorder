@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+    - main
+jobs:
+  video:
+    name: Record the video
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Install Deps
+        run: |
+          apt-get update && apt-get install -y \
+            curl \
+            git \
+            make \
+            wget \
+            unzip \
+            gnupg \
+            xvfb \
+            bash \
+            pulseaudio \
+            ffmpeg \
+            && apt-get clean \
+            && rm -rf /var/lib/apt/lists/*
+
+          wget 'https://github.com/macchrome/linchrome/releases/download/v131.6778.244-M131.0.6778.244-r1368529-portable-ungoogled-Lin64/ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz'
+          tar xvf ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz
+          pwd
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.1.0
+      - name: Install Deps
+        run: npm i
+          
