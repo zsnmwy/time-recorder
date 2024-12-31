@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Install Deps
