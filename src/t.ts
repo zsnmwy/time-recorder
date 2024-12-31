@@ -7,8 +7,8 @@ import * as fs from 'fs';
 
     const date = `happy-date`;
     try {
-        const width = 800;
-        const height = 800;
+        const width = 1280;
+        const height = 720;
         const display = await xvfbStart(date, {
             width,
             height,
@@ -20,6 +20,11 @@ import * as fs from 'fs';
 
         await new Promise((r) => setTimeout(r, 10 * 1000));
 
+        startRecorder(date, display, {
+            width,
+            height,
+        });
+        
         const browser = await puppeteer.launch({
             headless: false,
             executablePath: '/home/runner/work/time-recorder/time-recorder/ungoogled-chromium_131.0.6778.244_1.vaapi_linux/chrome',
@@ -54,12 +59,8 @@ import * as fs from 'fs';
             height,
         });        
         
-        startRecorder(date, display, {
-            width,
-            height,
-        });
 
-        await page.goto("https://cn-sh-ct-01-28.bilivideo.com/upgcxcode/35/04/27629060435/27629060435-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1735684702&gen=playurlv2&os=bcache&oi=730790904&trid=00009b05f094304949ad94107278860373f8h&mid=0&platform=html5&og=cos&upsig=40f76bd576b52bd883e8b791dc21c8ed&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88228&bvc=vod&nettype=0&f=h_0_0&bw=29925&logo=80000000")
+        await page.goto("https://cn-ahhf-ct-01-08.bilivideo.com/upgcxcode/58/65/27629456558/27629456558-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1735688682&gen=playurlv2&os=bcache&oi=730790904&trid=0000142d3d1e1bd54fdd93c478c20699de3fh&mid=0&platform=html5&og=cos&upsig=24eb12d39415e625cfd4f8919b001a20&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88408&bvc=vod&nettype=0&f=h_0_0&bw=35856&logo=80000000")
         // await page.waitForSelector('div');
         // await page.waitForSelector('div');
         await page.setBypassCSP(true);

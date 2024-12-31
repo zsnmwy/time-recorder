@@ -50,54 +50,44 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
-      // '-probesize', '6000M',
-      '-analyzeduration', '3000M',
-      '-vsync', '2',
-      '-use_wallclock_as_timestamps',
-      '1',
-      '-f', 'pulse', '-thread_queue_size', '4096', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
-      '-y',
-      // '-framerate',
-      // '30',
-      '-f',
-      'x11grab',
-      '-thread_queue_size', '4096',
-      '-s',
-      `${width}x${height}`,
+      "-nostdin",
+      "-loglevel", "info",
+      "-thread_queue_size", "4096",
+      '-video_size', `${width}x${height}`,
       '-draw_mouse',
       '0',
-      '-i',
-      // xvfb._display,
-      ':' + display,
-      '-c:v',
-      'libx264',
+      '-f', 'x11grab',
+      '-i', ':' + display,
+      '-f', 'pulse', '-i', await getFirstSourceIndex() as string,
+      '-c:v', 'libx264',
+      "-vf", "scale=1280:720",
       '-preset', 'ultrafast', // 编码器预设为最快速度
-      // '-profile:v', 'high', // 指定编码器配置文件为high
-      // '-pix_fmt', 'yuv420p', // 设置像素格式为yuv420p，以兼容High Profile
-      // '-level:v', '4.1', // 指定编码器级别为4.1
-      // '-crf', '23', // 设置码率控制模式/恒定速率因子模式为23
-      // '-acodec', 'aac', // 指定音频编码器为aac
-      // '-ar', '44100', // 设置音频采样率为44100Hz
-      // '-ac', '2', // 设置音频通道数为2，即立体声
-      // '-b:a', '192k', // 设置音频比特率为128kbps
-      '-bufsize', '20480k', // 缓冲区大小
-      '-maxrate', '20480k',
+      '-crf', '23', // 设置码率控制模式/恒定速率因子模式为23
+      '-c:a', 'aac',
+      '-b:a', '128k', // 设置音频比特率为128kbps
       '-async', '1',
+      '-f', 'mp4',
+      '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
+      "-bufsize", "2M",
+      "-flush_packets", "1",
+      "-y",
+      "pipe:1",
+
       `${BASE_PATH}${key}/screen.mp4`,
     ]
     console.log(`ffmpeg params`, params.join(` `))
     const ffmpeg = spawn('ffmpeg', params);
 
     ffmpeg.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
+      console.log(`${data}`);
     });
 
     ffmpeg.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`);
+      console.log(`${data}`);
     });
 
     ffmpeg.on('close', (code) => {
-      console.log(`child process exited with code ${code}`);
+      console.log(`ffmpeg exited with code ${code}`);
     });
 
     ffmpegIns.setFFmpeg(key, ffmpeg);
