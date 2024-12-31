@@ -50,8 +50,8 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
-      '-async',
-      '1',
+      '-thread_queue_size', '16',
+      '-async', '1',
       '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
       '-framerate',
@@ -76,8 +76,8 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '-ar', '44100', // 设置音频采样率为44100Hz
       '-ac', '2', // 设置音频通道数为2，即立体声
       '-b:a', '192k', // 设置音频比特率为128kbps
-      '-bufsize', '2048k', // 缓冲区大小
-
+      '-bufsize', '20480k', // 缓冲区大小
+      '-maxrate', '20480k',
       `${BASE_PATH}${key}/screen.mp4`,
     ]
     console.log(`ffmpeg params`, params.join(` `))
