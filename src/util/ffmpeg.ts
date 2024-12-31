@@ -50,7 +50,6 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
-      "-nostdin",
       "-loglevel", "info",
       "-thread_queue_size", "4096",
       '-video_size', `${width}x${height}`,
@@ -68,7 +67,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '-async', '1',
       '-f', 'mp4',
       '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
-      "-bufsize", "2M",
+      "-bufsize", "200M",
       "-flush_packets", "1",
       "-y",
       "pipe:1",
