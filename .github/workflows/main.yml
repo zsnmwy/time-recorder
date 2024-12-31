@@ -36,6 +36,7 @@ jobs:
         run: |
           set +x
           sudo adduser root pulse-access
+          sudo adduser $(whoami) pulse-access
           sudo pulseaudio -D --verbose --exit-idle-time=-1 --system --disallow-exit
           pactl load-module module-null-sink sink_name="grab" sink_properties=device.description="monitorOUT"
           pactl list short sources
