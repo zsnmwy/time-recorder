@@ -52,6 +52,7 @@ export const openUrls = async (options: Options, cookies: puppeteer.SetCookie, j
         '–-single-process', //单进程运行
         '--disable-gpu', //GPU硬件加速
         `--window-size=${width},${height}`,
+        '–kiosk'
       ],
     });
     const page = await browser.newPage();

@@ -78,6 +78,19 @@ export const xvfbStart = async (
     ]);
 
     xvfbIns.setXvfb(key, randomNum, xvfb, execPath);
+
+    xvfb.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
+
+    xvfb.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`);
+    });
+
+    xvfb.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
+
     return randomNum;
   } catch (error) {
     console.log(error);

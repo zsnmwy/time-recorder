@@ -21,7 +21,9 @@ const ffmpegIns = new FFmpeg();
 export const startRecorder = async (key: string, display: number, option: { width: number; height: number }) => {
   const { width, height } = option;
   try {
-    const ffmpeg = spawn('ffmpeg', [
+    const params = [
+      '-f', 'pulse', '-i', '0', '-c:a', 'pcm_s16le',
+      '-y',
       '-framerate',
       '12',
       '-f',
@@ -47,9 +49,25 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '384k',
       '-bufsize',
       '1024k',
-      '-an',
+      '-draw_mouse',
+      '0',
       `${BASE_PATH}${key}/screen.webm`,
-    ]);
+    ]
+    console.log(`ffmpeg params`, params.join(` `))
+    const ffmpeg = spawn('ffmpeg', params);
+
+    ffmpeg.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
+
+    ffmpeg.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`);
+    });
+
+    ffmpeg.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
+
     ffmpegIns.setFFmpeg(key, ffmpeg);
     return Promise.resolve();
   } catch (error) {
