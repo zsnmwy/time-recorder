@@ -7,14 +7,14 @@ const exec = promisify(execFile);
 
 async function getFirstSourceIndex() {
   try {
-    const {stdout, stderr} = await exec('sh', ['-c', 'pactl list short sources | awk \'{print $1}\'']);
+    const { stdout, stderr } = await exec('sh', ['-c', 'pactl list short sources | awk \'{print $1}\'']);
     if (stderr) {
       throw new Error(`命令执行错误: ${stderr}`);
     }
     const firstSourceIndex = stdout.trim();
     console.log(`第一个音频源的索引号是: ${firstSourceIndex}`);
     return firstSourceIndex;
-  } catch (error) {
+  } catch (error: any) {
     console.error(`执行命令出错: ${error.message}`);
   }
 }
@@ -41,7 +41,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
   const { width, height } = option;
 
   try {
-    mkdirSync(`${BASE_PATH}${key}`,{
+    mkdirSync(`${BASE_PATH}${key}`, {
       recursive: true
     })
   } catch (error) {
@@ -58,6 +58,8 @@ export const startRecorder = async (key: string, display: number, option: { widt
       'x11grab',
       '-s',
       `${width}x${height}`,
+      '-draw_mouse',
+      '0',
       '-i',
       // xvfb._display,
       ':' + display,
@@ -77,8 +79,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '384k',
       '-bufsize',
       '1024k',
-      '-draw_mouse',
-      '0',
+
       `${BASE_PATH}${key}/screen.webm`,
     ]
     console.log(`ffmpeg params`, params.join(` `))
