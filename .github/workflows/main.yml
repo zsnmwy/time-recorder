@@ -23,9 +23,7 @@ jobs:
             xvfb \
             bash \
             pulseaudio \
-            ffmpeg \
-            && apt-get clean \
-            && rm -rf /var/lib/apt/lists/*
+            ffmpeg
 
           wget -q 'https://github.com/macchrome/linchrome/releases/download/v131.6778.244-M131.0.6778.244-r1368529-portable-ungoogled-Lin64/ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz'
           tar xvf ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz
@@ -36,10 +34,10 @@ jobs:
         run: npm i
       - name: Run Pulseaudio
         run: |
+          set +x
           sudo adduser root pulse-access
           sudo pulseaudio -D --verbose --exit-idle-time=-1 --system --disallow-exit
-          sudo pactl load-module module-null-sink sink_name="grab" sink_properties=device.description="monitorOUT"
-          sudo pactl list short sources
+          pactl load-module module-null-sink sink_name="grab" sink_properties=device.description="monitorOUT"
           pactl list short sources
       - name: Record video
         run: |
