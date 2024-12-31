@@ -53,7 +53,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
       '-y',
       '-framerate',
-      '12',
+      '60',
       '-f',
       'x11grab',
       '-s',
@@ -64,23 +64,18 @@ export const startRecorder = async (key: string, display: number, option: { widt
       // xvfb._display,
       ':' + display,
       '-c:v',
-      'libvpx',
-      '-quality',
-      'realtime',
-      '-cpu-used',
-      '0',
-      '-b:v',
-      '384k',
-      '-qmin',
-      '10',
-      '-qmax',
-      '42',
-      '-maxrate',
-      '384k',
-      '-bufsize',
-      '1024k',
+      'libx264',
+      '-preset', 'medium', // 编码器预设为中等速度
+      '-profile:v', 'high', // 指定编码器配置文件为high
+      '-level:v', '4.1', // 指定编码器级别为4.1
+      '-crf', '23', // 设置码率控制模式/恒定速率因子模式为23
+      '-acodec', 'aac', // 指定音频编码器为aac
+      '-ar', '44100', // 设置音频采样率为44100Hz
+      '-ac', '2', // 设置音频通道数为2，即立体声
+      '-b:a', '192k', // 设置音频比特率为128kbps
+      '-bufsize', '2048k', // 缓冲区大小
 
-      `${BASE_PATH}${key}/screen.webm`,
+      `${BASE_PATH}${key}/screen.mp4`,
     ]
     console.log(`ffmpeg params`, params.join(` `))
     const ffmpeg = spawn('ffmpeg', params);
