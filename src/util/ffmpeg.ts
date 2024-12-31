@@ -80,7 +80,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       // '-b:a', '192k', // 设置音频比特率为128kbps
       '-bufsize', '20480k', // 缓冲区大小
       '-maxrate', '20480k',
-      '-probesize 10M', '-analyzeduration', '10M',
+      '-probesize', '10M', '-analyzeduration', '10M',
       '-async', '1',
       `${BASE_PATH}${key}/screen.mp4`,
     ]
