@@ -50,6 +50,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
 
   try {
     const params = [
+      '-vsync', '1',
       '-use_wallclock_as_timestamps',
       '1',
       // '-async', '1',
