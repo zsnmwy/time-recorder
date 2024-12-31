@@ -23,7 +23,11 @@ jobs:
             xvfb \
             bash \
             pulseaudio \
-            ffmpeg
+            ffmpeg \
+            fonts-noto-core \
+            fonts-noto-cjk \
+            language-pack-zh-hans \
+            fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
 
           wget -q 'https://github.com/macchrome/linchrome/releases/download/v131.6778.244-M131.0.6778.244-r1368529-portable-ungoogled-Lin64/ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz'
           tar xvf ungoogled-chromium_131.0.6778.244_1.vaapi_linux.tar.xz
