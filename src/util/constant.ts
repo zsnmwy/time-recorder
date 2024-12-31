@@ -7,7 +7,7 @@ export const isDev = process.env.NODE_ENV === 'development';
 
 export const COMMAND = '';
 
-export const BASE_PATH = '/home/runner/work/time-recorder';
+export const BASE_PATH = '/home/runner/work/time-recorder/';
 
 export const JS_ERROR_LOG_PATH = (date: number | string) => `${BASE_PATH}/${date}/js_error.log`;
 

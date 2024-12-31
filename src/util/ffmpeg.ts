@@ -2,6 +2,7 @@ import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import { BASE_PATH } from './constant';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
+import { mkdirSync } from 'fs';
 const exec = promisify(execFile);
 
 async function getFirstSourceIndex() {
@@ -38,6 +39,15 @@ const ffmpegIns = new FFmpeg();
 
 export const startRecorder = async (key: string, display: number, option: { width: number; height: number }) => {
   const { width, height } = option;
+
+  try {
+    mkdirSync(`${BASE_PATH}${key}`,{
+      recursive: true
+    })
+  } catch (error) {
+    console.error("fail to mkdir", error)
+  }
+
   try {
     const params = [
       '-f', 'pulse', '-i', await getFirstSourceIndex() as string, '-c:a', 'pcm_s16le',
