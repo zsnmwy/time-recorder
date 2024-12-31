@@ -67,6 +67,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       'libx264',
       '-preset', 'medium', // 编码器预设为中等速度
       '-profile:v', 'high', // 指定编码器配置文件为high
+      '-pix_fmt', 'yuv420p', // 设置像素格式为yuv420p，以兼容High Profile
       '-level:v', '4.1', // 指定编码器级别为4.1
       '-crf', '23', // 设置码率控制模式/恒定速率因子模式为23
       '-acodec', 'aac', // 指定音频编码器为aac
