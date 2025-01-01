@@ -61,6 +61,7 @@ export const startRecorder = async (key: string, display: number, option: { widt
       '-c:v', 'libx264',
       "-vf", "scale=1280:720",
       '-preset', 'ultrafast', // 编码器预设为最快速度
+      '-threads', '4',
       '-crf', '23', // 设置码率控制模式/恒定速率因子模式为23
       '-c:a', 'aac',
       '-b:a', '128k', // 设置音频比特率为128kbps
